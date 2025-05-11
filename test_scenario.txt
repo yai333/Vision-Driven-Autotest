@@ -1,0 +1,22 @@
+Open http://localhost:8000. 
+Click on the Login link in the navigation menu.
+Fill the username field with "user".
+Fill the password field with "pass".
+Click the Login button.
+Verify that "Welcome, Test User!" is visible on the dashboard.
+Click on the Home link in the navigation menu.
+Click the Advanced Search button.
+Fill the "Party ID" field with "iag00001".
+Click the Search button.
+Verify the results table contains party id "iag00001", first name "test user1", and last name "test".
+Click the "View" button in the results row.
+Verify the modal contains the text "Party ID: iag00001".
+Click the Close button on the modal.
+Scroll down to find the "Contact Information" section.
+Verify that a button labeled "Edit Contact" is visible.
+Click the "Edit Contact" button.
+Fill the "Email" field with "newemail@testapp.com".
+Click the Confirm button.
+Verify that a success message appears.
+Click on the Logout link in the navigation menu.
+Verify the login form is visible.

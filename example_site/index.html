@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestApp - Vision Autotest Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6baf;
+            --primary-dark: #345191;
+            --secondary: #f8f9fa;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --dark: #343a40;
+            --light: #f8f9fa;
+            --shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--warning);
+        }
+        
+        .search-bar {
+            display: flex;
+            margin: 15px 0;
+        }
+        
+        .search-bar input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            padding: 10px 15px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .search-bar button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        main {
+            padding: 30px 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .login-form .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .login-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+        }
+        
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .login-form button:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .logged-in {
+            display: none;
+        }
+        
+        .alert {
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--secondary);
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        #advanced-search-form {
+            display: none;
+        }
+        
+        #advanced-search-form.show {
+            display: block;
+        }
+        
+        #results-table {
+            display: none;
+        }
+        
+        #results-table.show {
+            display: block;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .pagination li {
+            margin: 0 5px;
+        }
+        
+        .pagination a {
+            display: block;
+            padding: 8px 12px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: var(--primary);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .pagination a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .pagination .active a {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* For the scrollable section */
+        .scrollable-section {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .modal-title {
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .modal-body {
+            margin-bottom: 20px;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">TestApp</a>
+                <ul class="nav-links">
+                    <li><a href="#" id="home-link">Home</a></li>
+                    <li><a href="#" id="dashboard-link">Dashboard</a></li>
+                    <li><a href="#" id="contact-link">Contact</a></li>
+                    <li><a href="#" id="login-nav-link">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Quick Search">
+            <button id="search-button"><i class="fas fa-search"></i> Search</button>
+        </div>
+
+        <main>
+            <!-- Home Section -->
+            <section id="home-section">
+                <div class="card">
+                    <h2>Welcome to TestApp</h2>
+                    <p>This is a simple website designed for testing web automation frameworks, especially those using visual recognition and AI.</p>
+                    
+                    <div class="buttons">
+                        <button class="btn btn-primary" id="advanced-search-button">Advanced Search</button>
+                        <button class="btn btn-success" id="view-profiles-button">View Profiles</button>
+                    </div>
+                    
+                    <!-- Advanced Search Form -->
+                    <div id="advanced-search-form" class="card" style="margin-top: 20px;">
+                        <h3>Advanced Search</h3>
+                        <form id="search-form">
+                            <div class="form-group">
+                                <label for="party-id">Party ID</label>
+                                <input type="text" id="party-id" placeholder="Enter party ID">
+                            </div>
+                            <div class="form-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" placeholder="Enter first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" placeholder="Enter last name">
+                            </div>
+                            <div class="form-group">
+                                <label for="dob">Date of Birth</label>
+                                <input type="date" id="dob">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                            <button type="button" class="btn btn-danger" id="clear-form">Clear</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Results Table -->
+                    <div id="results-table" class="card" style="margin-top: 20px;">
+                        <h3>Search Results</h3>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Party ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>DOB</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="results-body">
+                                <!-- Results will be populated here -->
+                            </tbody>
+                        </table>
+                        
+                        <ul class="pagination">
+                            <li><a href="#">&laquo;</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">&raquo;</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Secure login system</li>
+                        <li>Advanced search functionality</li>
+                        <li>User profile management</li>
+                        <li>Responsive design</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h2>Scrollable Content Section</h2>
+                    <div class="scrollable-section">
+                        <h3>Important Information</h3>
+                        <p>This section contains content that requires scrolling to view it all.</p>
+                        <p>Scroll down to see more content and test the scrolling functionality of your automation framework.</p>
+                        <br>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor urna id risus eleifend dictum. Nullam auctor urna id risus eleifend dictum.</p>
+                        <p>Suspendisse potenti. Aliquam erat volutpat. Praesent maximus sem eget nulla finibus, id dictum nisi elementum.</p>
+                        <p>Donec dignissim orci eget erat dictum, sit amet bibendum nulla molestie. Vivamus non massa nec mi vulputate condimentum vitae vitae nulla.</p>
+                        <p>Nullam at tortor vel turpis rhoncus interdum non vel mauris. Ut non sem a sapien rutrum malesuada.</p>
+                        <br>
+                        <div class="contact-info">
+                            <h4>Contact Information</h4>
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>support@testapp.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+1 (123) 456-7890</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Test Street, Demo City, 12345</span>
+                            </div>
+                            <button id="edit-contact" class="btn btn-primary">Edit Contact</button>
+                        </div>
+                        <br>
+                        <p>This is the end of the scrollable section.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Login Section -->
+            <section id="login-section" style="display: none;">
+                <div class="card">
+                    <h2>Login</h2>
+                    <div class="alert alert-danger" id="login-error">Invalid username or password.</div>
+                    <div class="alert alert-success" id="login-success">Login successful! Redirecting...</div>
+                    
+                    <form class="login-form" id="login-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="remember-me"> Remember me
+                            </label>
+                        </div>
+                        <button type="submit">Login</button>
+                    </form>
+                    
+                    <p style="text-align: center; margin-top: 15px;">
+                        <a href="#" id="forgot-password">Forgot password?</a>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Dashboard Section (visible after login) -->
+            <section id="dashboard-section" style="display: none;">
+                <div class="card">
+                    <h2>Dashboard</h2>
+                    <p>Welcome, <span id="user-name">User</span>! You are now logged in.</p>
+                    
+                    <div class="buttons">
+                        <button class="btn btn-primary" id="view-account">View Account</button>
+                        <button class="btn btn-warning" id="edit-profile">Edit Profile</button>
+                        <button class="btn btn-danger" id="logout-button">Logout</button>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h2>Recent Activity</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Action</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-06-15</td>
+                                <td>Login</td>
+                                <td>Successful login from 192.168.1.1</td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-14</td>
+                                <td>Profile Update</td>
+                                <td>Updated contact information</td>
+                            </tr>
+                            <tr>
+                                <td>2023-06-10</td>
+                                <td>Search</td>
+                                <td>Searched for "user123"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact-section" style="display: none;">
+                <div class="card">
+                    <h2>Contact Us</h2>
+                    <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
+                    
+                    <form class="login-form" id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Name</label>
+                            <input type="text" id="contact-name" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Subject</label>
+                            <input type="text" id="contact-subject" placeholder="Enter the subject">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Message</label>
+                            <textarea id="contact-message" rows="5" placeholder="Enter your message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 TestApp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                Modal content goes here.
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" id="modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample user data
+        const users = [
+            { id: 1, username: 'user', password: 'pass', name: 'Test User' },
+            { id: 2, username: 'admin', password: 'admin123', name: 'Admin User' }
+        ];
+        
+        // Sample search results
+        const searchResults = [
+            { partyId: 'iag00001', firstName: 'test user1', lastName: 'test', dob: '1991-10-10' },
+            { partyId: 'iag00002', firstName: 'Jane', lastName: 'Smith', dob: '1985-05-20' },
+            { partyId: 'iag00003', firstName: 'Michael', lastName: 'Johnson', dob: '1978-12-15' },
+            { partyId: 'iag00004', firstName: 'Emily', lastName: 'Davis', dob: '1990-07-30' },
+            { partyId: 'iag00005', firstName: 'Robert', lastName: 'Wilson', dob: '1982-03-25' }
+        ];
+        
+        // DOM Elements
+        const homeSection = document.getElementById('home-section');
+        const loginSection = document.getElementById('login-section');
+        const dashboardSection = document.getElementById('dashboard-section');
+        const contactSection = document.getElementById('contact-section');
+        
+        const homeLink = document.getElementById('home-link');
+        const dashboardLink = document.getElementById('dashboard-link');
+        const contactLink = document.getElementById('contact-link');
+        const loginNavLink = document.getElementById('login-nav-link');
+        
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const loginSuccess = document.getElementById('login-success');
+        const logoutButton = document.getElementById('logout-button');
+        const userNameSpan = document.getElementById('user-name');
+        
+        const advancedSearchButton = document.getElementById('advanced-search-button');
+        const advancedSearchForm = document.getElementById('advanced-search-form');
+        const searchForm = document.getElementById('search-form');
+        const clearFormButton = document.getElementById('clear-form');
+        const resultsTable = document.getElementById('results-table');
+        const resultsBody = document.getElementById('results-body');
+        
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeModal = document.querySelector('.close-modal');
+        const modalCancel = document.getElementById('modal-cancel');
+        const modalConfirm = document.getElementById('modal-confirm');
+        
+        // Navigation
+        function showSection(section) {
+            homeSection.style.display = 'none';
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'none';
+            contactSection.style.display = 'none';
+            
+            section.style.display = 'block';
+        }
+        
+        homeLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection(homeSection);
+        });
+        
+        dashboardLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn()) {
+                showSection(dashboardSection);
+            } else {
+                showSection(loginSection);
+            }
+        });
+        
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            showSection(contactSection);
+        });
+        
+        loginNavLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (isLoggedIn()) {
+                logout();
+            } else {
+                showSection(loginSection);
+            }
+        });
+        
+        // Login functionality
+        function isLoggedIn() {
+            return localStorage.getItem('loggedIn') === 'true';
+        }
+        
+        function updateLoginState() {
+            if (isLoggedIn()) {
+                loginNavLink.textContent = 'Logout';
+                userNameSpan.textContent = localStorage.getItem('userName');
+            } else {
+                loginNavLink.textContent = 'Login';
+            }
+        }
+        
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const user = users.find(u => u.username === username && u.password === password);
+            
+            if (user) {
+                loginError.style.display = 'none';
+                loginSuccess.style.display = 'block';
+                
+                localStorage.setItem('loggedIn', 'true');
+                localStorage.setItem('userId', user.id);
+                localStorage.setItem('userName', user.name);
+                
+                updateLoginState();
+                
+                setTimeout(() => {
+                    showSection(dashboardSection);
+                }, 1500);
+            } else {
+                loginSuccess.style.display = 'none';
+                loginError.style.display = 'block';
+            }
+        });
+        
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            
+            updateLoginState();
+            showSection(homeSection);
+        }
+        
+        logoutButton.addEventListener('click', logout);
+        
+        // Advanced Search
+        advancedSearchButton.addEventListener('click', () => {
+            advancedSearchForm.classList.toggle('show');
+            if (resultsTable.classList.contains('show')) {
+                resultsTable.classList.remove('show');
+            }
+        });
+        
+        clearFormButton.addEventListener('click', () => {
+            document.getElementById('party-id').value = '';
+            document.getElementById('first-name').value = '';
+            document.getElementById('last-name').value = '';
+            document.getElementById('dob').value = '';
+        });
+        
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const partyId = document.getElementById('party-id').value.toLowerCase();
+            const firstName = document.getElementById('first-name').value.toLowerCase();
+            const lastName = document.getElementById('last-name').value.toLowerCase();
+            const dob = document.getElementById('dob').value;
+            
+            // Filter results based on search criteria
+            let filteredResults = searchResults;
+            
+            if (partyId) {
+                filteredResults = filteredResults.filter(r => r.partyId.toLowerCase().includes(partyId));
+            }
+            
+            if (firstName) {
+                filteredResults = filteredResults.filter(r => r.firstName.toLowerCase().includes(firstName));
+            }
+            
+            if (lastName) {
+                filteredResults = filteredResults.filter(r => r.lastName.toLowerCase().includes(lastName));
+            }
+            
+            if (dob) {
+                filteredResults = filteredResults.filter(r => r.dob === dob);
+            }
+            
+            // Display results
+            resultsBody.innerHTML = '';
+            
+            filteredResults.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${result.partyId}</td>
+                    <td>${result.firstName}</td>
+                    <td>${result.lastName}</td>
+                    <td>${result.dob}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm view-details" data-id="${result.partyId}">View</button>
+                        <button class="btn btn-warning btn-sm edit-details" data-id="${result.partyId}">Edit</button>
+                    </td>
+                `;
+                resultsBody.appendChild(row);
+            });
+            
+            if (filteredResults.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="5" style="text-align: center;">No results found</td>';
+                resultsBody.appendChild(row);
+            }
+            
+            resultsTable.classList.add('show');
+            
+            // Add event listeners to view/edit buttons
+            document.querySelectorAll('.view-details').forEach(button => {
+                button.addEventListener('click', () => {
+                    const partyId = button.getAttribute('data-id');
+                    const result = searchResults.find(r => r.partyId === partyId);
+                    
+                    if (result) {
+                        showModal('User Details', `
+                            <p><strong>Party ID:</strong> ${result.partyId}</p>
+                            <p><strong>Name:</strong> ${result.firstName} ${result.lastName}</p>
+                            <p><strong>Date of Birth:</strong> ${result.dob}</p>
+                        `);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.edit-details').forEach(button => {
+                button.addEventListener('click', () => {
+                    const partyId = button.getAttribute('data-id');
+                    const result = searchResults.find(r => r.partyId === partyId);
+                    
+                    if (result) {
+                        showModal('Edit User', `
+                            <div class="form-group">
+                                <label>Party ID</label>
+                                <input type="text" value="${result.partyId}" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" value="${result.firstName}">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" value="${result.lastName}">
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" value="${result.dob}">
+                            </div>
+                        `);
+                    }
+                });
+            });
+        });
+        
+        // Quick Search
+        const searchInput = document.getElementById('search-input');
+        const searchButton = document.getElementById('search-button');
+        
+        searchButton.addEventListener('click', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm) {
+                // Fill advanced search form with the search term
+                document.getElementById('party-id').value = searchTerm;
+                
+                // Show advanced search form
+                advancedSearchForm.classList.add('show');
+                
+                // Submit the search form
+                searchForm.dispatchEvent(new Event('submit'));
+            }
+        });
+        
+        // Modal
+        function showModal(title, content) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            modal.classList.add('show');
+        }
+        
+        function hideModal() {
+            modal.classList.remove('show');
+        }
+        
+        closeModal.addEventListener('click', hideModal);
+        modalCancel.addEventListener('click', hideModal);
+        
+        modalConfirm.addEventListener('click', () => {
+            // Handle confirmation action here
+            hideModal();
+            
+            // Show success message
+            showModal('Success', '<p>Operation completed successfully!</p>');
+            
+            // Hide the modal after a delay
+            setTimeout(hideModal, 1500);
+        });
+        
+        // Additional UI elements
+        document.getElementById('view-profiles-button').addEventListener('click', () => {
+            // Fill party ID with empty string to show all results
+            document.getElementById('party-id').value = '';
+            
+            // Submit the search form to show all results
+            searchForm.dispatchEvent(new Event('submit'));
+        });
+        
+        document.getElementById('forgot-password').addEventListener('click', (e) => {
+            e.preventDefault();
+            showModal('Forgot Password', `
+                <p>Enter your email address to reset your password.</p>
+                <div class="form-group">
+                    <input type="email" placeholder="Enter your email">
+                </div>
+            `);
+        });
+        
+        document.getElementById('view-account').addEventListener('click', () => {
+            showModal('Account Information', `
+                <p><strong>Username:</strong> ${localStorage.getItem('userName')}</p>
+                <p><strong>Account Type:</strong> Standard</p>
+                <p><strong>Last Login:</strong> ${new Date().toLocaleString()}</p>
+            `);
+        });
+        
+        document.getElementById('edit-profile').addEventListener('click', () => {
+            showModal('Edit Profile', `
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" value="${localStorage.getItem('userName')}">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" value="user@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" value="+1 (123) 456-7890">
+                </div>
+            `);
+        });
+        
+        document.getElementById('edit-contact').addEventListener('click', () => {
+            showModal('Edit Contact Information', `
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" value="support@testapp.com">
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="tel" value="+1 (123) 456-7890">
+                </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" value="123 Test Street, Demo City, 12345">
+                </div>
+            `);
+        });
+        
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            showModal('Message Sent', `
+                <p>Thank you for your message! We will get back to you soon.</p>
+            `);
+            
+            // Reset form
+            document.getElementById('contact-form').reset();
+        });
+        
+        // Initialize
+        updateLoginState();
+        
+        // Check if user is logged in and update UI
+        if (isLoggedIn()) {
+            loginNavLink.textContent = 'Logout';
+        } else {
+            loginNavLink.textContent = 'Login';
+        }
+    </script>
+</body>
+</html>

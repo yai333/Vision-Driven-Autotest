@@ -1,0 +1,12 @@
+# Core dependencies
+langchain-core>=0.1.0
+langgraph>=0.0.15
+playwright>=1.40.0
+pydantic>=2.0.0
+
+# LLM providers
+langchain-openai>=0.0.5
+openai>=1.0.0
+
+# Utilities
+python-dotenv>=1.0.0
